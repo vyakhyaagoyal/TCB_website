@@ -1,10 +1,11 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { Montserrat } from "next/font/google";
+import Image from 'next/image';
 
 const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "700"],
+    subsets: ["latin"],
+    weight: ["400", "700"],
 });
 
 const DEFAULT_PARTICLE_COUNT = 12;
@@ -16,12 +17,14 @@ const techDomains = [
     {
         title: "Web Development",
         desc: "Build and design interactive websites and web apps using modern technologies like React, Next.js, and Tailwind CSS.",
-        icon: './webdev.svg'
+        //icon: './webdev.svg',
+        bg: 'webdev.svg'
     },
     {
         title: "Competitive Programming",
         desc: "Solve coding challenges, boost problem-solving skills, and prepare for global tech contests.",
-        icon: './cp.svg'
+        //icon: './cp.svg',
+        bg: 'cp.svg'
     },
     {
         title: "Machine Learning",
@@ -36,22 +39,22 @@ const techDomains = [
 ];
 
 const nonTechDomains = [
-  {
-    title: "Content Writing",
-    desc: "Craft engaging stories and blogs that connect ideas with people.",
-  },
-  {
-    title: "Event Management",
-    desc: "Plan, organize, and execute exciting campus and tech events.",
-  },
-  {
-    title: "Graphic Designing",
-    desc: "Explore creativity with UI/UX and graphic design experiences.",
-  },
-  {
-    title: "PR & Marketing",
-    desc: "Promote events, engage audiences, and build strong community presence.",
-  },
+    {
+        title: "Content Writing",
+        desc: "Craft engaging stories and blogs that connect ideas with people.",
+    },
+    {
+        title: "Event Management",
+        desc: "Plan, organize, and execute exciting campus and tech events.",
+    },
+    {
+        title: "Graphic Designing",
+        desc: "Explore creativity with UI/UX and graphic design experiences.",
+    },
+    {
+        title: "PR & Marketing",
+        desc: "Promote events, engage audiences, and build strong community presence.",
+    },
 ];
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
@@ -457,7 +460,7 @@ const GlobalSpotlight = ({
     return null;
 };
 
-const BentoCardGrid = ({ children, gridRef,activeTab }) => (
+const BentoCardGrid = ({ children, gridRef, activeTab }) => (
     <div
         className="bento-section w-full flex justify-center px-4 select-none relative"
         style={{ fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)' }}
@@ -486,7 +489,6 @@ const useMobileDetection = () => {
 };
 
 const Bento = ({
-    textAutoHide = true,
     enableStars = true,
     enableSpotlight = true,
     enableBorderGlow = true,
@@ -518,199 +520,230 @@ const Bento = ({
         if (enableStars) {
             return (
                 <ParticleCard
-    key={index}
-    className={baseClassName}
-    style={cardStyle}
-    disableAnimations={shouldDisableAnimations}
-    particleCount={particleCount}
-    glowColor={glowColor}
-    enableTilt={enableTilt}
-    clickEffect={clickEffect}
-    enableMagnetism={enableMagnetism}
->
-    <div className="flex flex-col justify-start h-full p-2">
-        <h3 className={`${montserrat.className} text-start m-5 text-3xl font-semibold `}>
-            {card.title}
-        </h3>
-        <p className={`text-sm text-start m-5 opacity-80 mt-2`}>
-            {card.desc}
-        </p>
-    </div>
-</ParticleCard>
+                    key={index}
+                    className={baseClassName}
+                    style={cardStyle}
+                    disableAnimations={shouldDisableAnimations}
+                    particleCount={particleCount}
+                    glowColor={glowColor}
+                    enableTilt={enableTilt}
+                    clickEffect={clickEffect}
+                    enableMagnetism={enableMagnetism}
+                >
+                    <div className="flex flex-col justify-start h-full p-2">
+                        <h3 className={`${montserrat.className} text-start m-5 text-3xl font-semibold `}>
+                            {card.title}
+                        </h3>
+                        <p className={`text-sm text-start m-5 opacity-80 mt-2`}>
+                            {card.desc}
+                        </p>
+
+                        {/* Render bg image only if it exists */}
+                        {card.bg && (
+                            <Image src={card.bg} alt="bg-image" className='absolute bottom-0 right-0 opacity-80 rounded-b-3xl' width={140} height={240} />
+                        )}
+                    </div>
+                </ParticleCard>
             );
         }
     };
 
 
-    return (
-        <>
-            <style>
-                {`
-          .bento-section {
-            --glow-x: 50%;
-            --glow-y: 50%;
-            --glow-intensity: 0;
-            --glow-radius: 200px;
-            --glow-color: ${glowColor};
-            --border-color: #392e4e;
-            --background-dark: #060010;
-            --white: hsl(0, 0%, 100%);
-            --teal-primary: rgba(5, 74, 72, 1);
---teal-glow: rgba(5, 74, 72, 0.2);
---teal-border: rgba(5, 74, 72, 0.8);
-
-          }
+    // inside your existing Bento component (replace the return block with this 👇)
+return (
+  <>
+    <style>
+      {`
+        .bento-section {
+          --glow-x: 50%;
+          --glow-y: 50%;
+          --glow-intensity: 0;
+          --glow-radius: 200px;
+          --glow-color: ${glowColor};
+          --border-color: #392e4e;
+          --background-dark: #060010;
+          --white: hsl(0, 0%, 100%);
+          --teal-primary: rgba(5, 74, 72, 1);
+          --teal-glow: rgba(5, 74, 72, 0.2);
+          --teal-border: rgba(5, 74, 72, 0.8);
+        }
 
         .card-responsive {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  //min-height: 100vh;
-}
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+        }
 
-.card {
-  height: 250px !important;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-          
-          .card--border-glow::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            padding: 6px;
-            background: radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y),
-                rgba(${glowColor}, calc(var(--glow-intensity) * 0.8)) 0%,
-                rgba(${glowColor}, calc(var(--glow-intensity) * 0.4)) 30%,
-                transparent 60%);
-            border-radius: inherit;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: subtract;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-          }
-          
-          .card--border-glow:hover::after {
-            opacity: 1;
-          }
-          
-          .card--border-glow:hover {
-            box-shadow: 0 4px 20px rgba(2, 37, 36, 0.4), 0 0 30px rgba(5, 74, 72, 0.2);
-          }
-          
-          .particle::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: rgba(${glowColor}, 0.2);
-            border-radius: 50%;
-            z-index: -1;
-          }
-          
-          .particle-container:hover {
-            box-shadow: 0 4px 20px rgba(2, 37, 36, 0.2), 0 0 30px rgba(5, 74, 72, 0.2);
-          }
-          
-          .text-clamp-1 {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            line-clamp: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          
-          .text-clamp-2 {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          
-          @media (max-width: 599px) {
-            .card-responsive {
-              grid-template-columns: 1fr;
-              width: 90%;
-              margin: 0 auto;
-              padding: 0.5rem;
-            }
-            
-            .card-responsive .card {
-              width: 100%;
-              min-height: 180px;
-            }
-          }
-        `}
-            </style>
+        .card {
+          height: 250px !important;
+          border-radius: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
 
-            {enableSpotlight && (
-                <GlobalSpotlight
-                    gridRef={gridRef}
-                    disableAnimations={shouldDisableAnimations}
-                    enabled={enableSpotlight}
-                    spotlightRadius={spotlightRadius}
-                    glowColor={glowColor}
-                />
-            )}
-            
-            {activeTab === "tech" && (
-            <BentoCardGrid gridRef={gridRef} key="tech">
-                <div className="flex flex-col justify-center items-center gap-4">
-                    {/* Row 1 */}
-                    <div className="flex justify-center items-center gap-4">
-                        {techDomains.slice(0, 2).map((card, index) => {
-                            const width = index === 0 ? '650px' : '400px';
-                            return renderCard(card, index, width);
-                        })}
-                    </div>
+        .card--border-glow::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 6px;
+          background: radial-gradient(
+            var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+            rgba(${glowColor}, calc(var(--glow-intensity) * 0.8)) 0%,
+            rgba(${glowColor}, calc(var(--glow-intensity) * 0.4)) 30%,
+            transparent 60%
+          );
+          border-radius: inherit;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: subtract;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+          z-index: 1;
+        }
 
-                    {/* Row 2 */}
-                    <div className="flex justify-center gap-4">
-                        {techDomains.slice(2, 4).map((card, index) => {
-                            const width = index === 0 ? '400px' : '650px'; // <-- swapped widths here
-                            return renderCard(card, index + 2, width); // index offset for unique key
-                        })}
-                    </div>
-                </div>
-            </BentoCardGrid>
-            )}
+        .card--border-glow:hover::after {
+          opacity: 1;
+        }
 
-            {activeTab === "nontech" && (
-            <BentoCardGrid gridRef={gridRef} key="nontech">
-                <div className="flex flex-col justify-center items-center gap-4">
-                    {/* Row 1 */}
-                    <div className="flex justify-center items-center gap-4">
-                        {nonTechDomains.slice(0, 2).map((card, index) => {
-                            const width = index === 0 ? '400px' : '650px';
-                            return renderCard(card, index, width);
-                        })}
-                    </div>
+        .card--border-glow:hover {
+          box-shadow: 0 4px 20px rgba(2, 37, 36, 0.4), 0 0 30px rgba(5, 74, 72, 0.2);
+        }
 
-                    {/* Row 2 */}
-                    <div className="flex justify-center gap-4">
-                        {nonTechDomains.slice(2, 4).map((card, index) => {
-                            const width = index === 0 ? '650px' : '400px'; // <-- swapped widths here
-                            return renderCard(card, index + 2, width); // index offset for unique key
-                        })}
-                    </div>
-                </div>
-            </BentoCardGrid>
-            )}
-        </>
-    );
+        @media (max-width: 768px) {
+          .bento-mobile {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0 1rem;
+            width: 100%;
+          }
+          .bento-desktop {
+            display: none !important;
+          }
+          .bento-mobile .card {
+            width: 100% !important;
+            height: 200px !important;
+            border-radius: 18px;
+          }
+        }
+
+        @media (min-width: 769px) {
+          .bento-desktop {
+            display: block;
+          }
+          .bento-mobile {
+            display: none;
+          }
+        }
+      `}
+    </style>
+
+    {enableSpotlight && (
+      <GlobalSpotlight
+        gridRef={gridRef}
+        disableAnimations={shouldDisableAnimations}
+        enabled={enableSpotlight}
+        spotlightRadius={spotlightRadius}
+        glowColor={glowColor}
+      />
+    )}
+
+    {/* ================== DESKTOP VIEW (UNCHANGED) ================== */}
+    <div className="bento-desktop">
+      {activeTab === "tech" && (
+        <BentoCardGrid gridRef={gridRef} key="tech">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <div className="flex justify-center items-center gap-4">
+              {techDomains.slice(0, 2).map((card, index) => {
+                const width = index === 0 ? "650px" : "400px";
+                return renderCard(card, index, width);
+              })}
+            </div>
+            <div className="flex justify-center gap-4">
+              {techDomains.slice(2, 4).map((card, index) => {
+                const width = index === 0 ? "400px" : "650px";
+                return renderCard(card, index + 2, width);
+              })}
+            </div>
+          </div>
+        </BentoCardGrid>
+      )}
+
+      {activeTab === "nontech" && (
+        <BentoCardGrid gridRef={gridRef} key="nontech">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <div className="flex justify-center items-center gap-4">
+              {nonTechDomains.slice(0, 2).map((card, index) => {
+                const width = index === 0 ? "400px" : "650px";
+                return renderCard(card, index, width);
+              })}
+            </div>
+            <div className="flex justify-center gap-4">
+              {nonTechDomains.slice(2, 4).map((card, index) => {
+                const width = index === 0 ? "650px" : "400px";
+                return renderCard(card, index + 2, width);
+              })}
+            </div>
+          </div>
+        </BentoCardGrid>
+      )}
+    </div>
+
+    {/* ================== MOBILE VIEW (NEW SECTION) ================== */}
+<div className="bento-mobile">
+  {(activeTab === "tech" ? techDomains : nonTechDomains).map((card, i) => (
+    <ParticleCard
+      key={i}
+      className={`card flex flex-col justify-center items-center relative border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out ${
+        enableBorderGlow ? "card--border-glow" : ""
+      }`}
+      style={{
+        backgroundColor: "var(--background-dark)",
+        borderColor: "rgba(57, 46, 78, 1)", // ✅ same as desktop border color
+        color: "var(--white)",
+        width: "100%",
+        height: "220px",
+        boxShadow:
+          "0 4px 20px rgba(2, 37, 36, 0.4), 0 0 30px rgba(5, 74, 72, 0.2)", // ✅ same soft glow as desktop
+      }}
+      disableAnimations
+      particleCount={DEFAULT_PARTICLE_COUNT}
+      glowColor={DEFAULT_GLOW_COLOR}
+      enableTilt={false}
+      clickEffect={false}
+      enableMagnetism={false}
+    >
+      <div className="flex flex-col justify-start h-full p-3 sm:p-4">
+        <h3
+          className={`${montserrat.className} text-start text-lg sm:text-xl font-semibold m-3 leading-tight`}
+        >
+          {card.title}
+        </h3>
+        <p className="text-xs sm:text-sm text-start opacity-80 m-3 mt-1 leading-snug">
+          {card.desc}
+        </p>
+        {card.bg && (
+          <Image
+            src={card.bg}
+            alt="bg"
+            className="absolute bottom-0 right-0 opacity-70 rounded-b-3xl"
+            width={100}
+            height={160}
+          />
+        )}
+      </div>
+    </ParticleCard>
+  ))}
+</div>
+
+  </>
+);
+
 };
 
 export default Bento;
