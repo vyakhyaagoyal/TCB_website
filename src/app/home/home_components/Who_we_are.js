@@ -35,7 +35,6 @@ export default function Who_we_are() {
                         The CodeBreakers is a passionate student community empowering members across all backgrounds to discover, learn, and shine in tech and creative fields. Whether you’re into coding, design, content, or event planning, you’ll find your place—and your people—right here.
                     </p>
 
-
                     <button className="bg-gradient-to-r from-white/10 to-black/20 backdrop-blur-md border border-white/30 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base text-white font-semibold hover:bg-white/20 transition duration-300 ease-in-out">
                         Learn More →
                     </button>
