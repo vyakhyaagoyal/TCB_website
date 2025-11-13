@@ -23,7 +23,7 @@ export default function Carousel() {
   const length = carouselImages.length;
 
   const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % length);
-  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + length) % length);
+  // const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + length) % length);
 
   // Detect screen size for responsiveness
   useEffect(() => {
@@ -68,9 +68,8 @@ export default function Carousel() {
 
   return (
     <div
-      className={`relative w-full flex items-center justify-center ${
-        isMobile ? "p-2" : "p-12"
-      } bg-black overflow-hidden`}
+      className={`relative w-full flex items-center justify-center ${isMobile ? "p-2" : "p-12"
+        } bg-black overflow-hidden`}
     >
       {/* Left Arrow */}
       {/* <button
@@ -84,9 +83,8 @@ export default function Carousel() {
 
       {/* Carousel */}
       <div
-        className={`relative flex items-center justify-center w-full ${
-          isMobile ? "max-w-xs h-[220px]" : "max-w-8xl h-[400px]"
-        } overflow-hidden`}
+        className={`relative flex items-center justify-center w-full ${isMobile ? "max-w-xs h-[220px] overflow-visible" : "max-w-8xl h-[400px]"
+          }`}
       >
         {carouselImages.map((src, index) => {
           const { x, scale, zIndex, blur, opacity } = getPositionStyle(index);
@@ -94,25 +92,44 @@ export default function Carousel() {
           return (
             <motion.div
               key={index}
-              className={`absolute ${blur || ""}`}
-              style={{ zIndex, opacity }}
+              className="absolute"
+              style={{
+                zIndex,
+                opacity,
+                clipPath: "inset(0 round 12px)"  // ★ rounded corners ALWAYS applied here
+              }}
               animate={{ x, scale, opacity }}
               transition={{ type: "spring", stiffness: 80, damping: 20 }}
             >
-              <div
-                className={`relative ${
-                  isMobile ? "w-64 h-40" : "w-130 h-80"
-                } rounded-2xl overflow-hidden shadow-xl border border-gray-700`}
-              >
-                <Image
-                  src={src}
-                  alt={`carousel-${index}`}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className="rounded-2xl"
-                />
+
+              <div className="rounded-2xl overflow-hidden">
+                <div className={`${blur || ""} w-full h-full`}>
+                  <div
+                    className="relative"
+                    style={{
+                      width: isMobile ? "clamp(140px, 55vw, 260px)" : "clamp(200px, 28vw, 520px)",
+                      height: isMobile ? "clamp(90px, 35vw, 160px)" : "clamp(140px, 18vw, 320px)",
+                      borderRadius: "16px",
+                      overflow: "hidden",
+                      clipPath: "inset(0 round 16px)"
+                    }}
+                  >
+
+                    <Image
+                      src={src}
+                      alt={`carousel-${index}`}
+                      fill
+                      style={{
+                        objectFit: "cover",
+                        clipPath: "inset(0 round 12px)"  // ★ ensures perfect corners on real pixels
+                      }}
+                    />
+
+                  </div>
+                </div>
               </div>
             </motion.div>
+
           );
         })}
       </div>
