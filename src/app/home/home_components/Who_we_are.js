@@ -1,5 +1,6 @@
 "use client";
 import { Oxanium, Montserrat } from "next/font/google";
+import Image from "next/image";
 
 const oxanium = Oxanium({
     subsets: ["latin"],
@@ -9,6 +10,13 @@ const montserrat = Montserrat({
     subsets: ["latin"],
     weight: ["400", "700"],
 });
+
+const navigateToDomains=()=>{
+    const domainsSection = document.getElementById('domains');
+    if (domainsSection) {
+        domainsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
 
 export default function Who_we_are() {
     return (
@@ -32,21 +40,24 @@ export default function Who_we_are() {
     max-w-[800px] w-full
   `}
                     >
-                        The CodeBreakers is a passionate student community empowering members across all backgrounds to discover, learn, and shine in tech and creative fields. Whether you’re into coding, design, content, or event planning, you’ll find your place—and your people—right here.
+                        The CodeBreakers is not just a club  but it’s a community of dreamers, builders, and creators. It’s a space where ideas grow, skills evolve, and teamwork turns imagination into reality. Whether it’s coding, design, content, or event management here every member finds a place to explore, connect, and shine.
                     </p>
 
-                    <button className="bg-gradient-to-r from-white/10 to-black/20 backdrop-blur-md border border-white/30 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base text-white font-semibold hover:bg-white/20 transition duration-300 ease-in-out">
+                    <button className="bg-gradient-to-r from-white/10 to-black/20 backdrop-blur-md border border-white/30 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base text-white font-semibold hover:bg-white/20 transition duration-300 ease-in-out"
+                    onClick={navigateToDomains}>
                         Learn More →
                     </button>
                 </div>
 
                 {/* Image Section */}
-                <div className="flex-1 flex justify-center md:justify-end w-full">
-                    <div className="h-44 w-44 sm:h-56 sm:w-56 md:h-72 md:w-72 rounded-2xl overflow-hidden shadow-lg">
-                        <img
-                            src="/carousel/sample_img.png"
+                <div className="flex-1 flex justify-center w-full">
+                    <div className="h-44 w-44 sm:h-56 sm:w-56 md:h-72 md:w-[300px] rounded-2xl overflow-visible shadow-lg">
+                        <Image
+                        height={1000}
+                        width={1000}
+                            src="/carousel/tcb_1.png"
                             alt="Who We Are"
-                            className="h-full w-full object-cover scale-105 hover:scale-110 transition-transform duration-500 ease-in-out"
+                            className="h-full w-full object-contain scale-125 md:scale-150 hover:scale-[1.6] transition-transform duration-500 ease-in-out"
                             loading="lazy"
                         />
                     </div>

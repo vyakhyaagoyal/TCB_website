@@ -16,24 +16,24 @@ const MOBILE_BREAKPOINT = 768;
 const techDomains = [
     {
         title: "Web Development",
-        desc: "Build and design interactive websites and web apps using modern technologies like React, Next.js, and Tailwind CSS.",
+        desc: "Bring your ideas to life by building modern web apps and Master the tools real developers use. Build fast, responsive sites and apps with React, Next.js, and Tailwind CSS.",
         //icon: './webdev.svg',
-        bg: 'webdev.svg'
+        bg: '/bento/webdev.svg'
     },
     {
         title: "Competitive Programming",
-        desc: "Solve coding challenges, boost problem-solving skills, and prepare for global tech contests.",
+        desc: "Enhances coding skills through hands-on problems building sharper logic and stronger problem-solving ability.",
         //icon: './cp.svg',
-        bg: 'cp.svg'
+        bg: '/bento/cp.svg'
     },
     {
         title: "Machine Learning",
-        desc: "Explore real-world AI with hands-on projects using Python, TensorFlow, and data-driven insights.",
-        //icon:'./webdev.svg'
+        desc: "Dive into the world of intelligent systems with hands-on projects and see how machines learn from experience.",
+        bg:'/bento/ml.svg'
     },
     {
         title: "Blockchain",
-        desc: "Learn the technology behind cryptocurrencies, decentralized apps, and smart contracts.",
+        desc: "Discover how blockchain powers cryptocurrencies, decentralized apps, and smart contracts . Emphasizes its role in creating trust and security across online networks.",
         //icon:'./webdev.svg'
     },
 ];
@@ -46,10 +46,12 @@ const nonTechDomains = [
     {
         title: "Event Management",
         desc: "Plan, organize, and execute exciting campus and tech events.",
+        bg:'/bento/events.svg'
     },
     {
         title: "Graphic Designing",
         desc: "Explore creativity with UI/UX and graphic design experiences.",
+        bg:'/bento/graphics.svg'
     },
     {
         title: "PR & Marketing",
@@ -551,7 +553,7 @@ const Bento = ({
 
     // inside your existing Bento component (replace the return block with this 👇)
 return (
-  <>
+  <section id="domains">
     <style>
       {`
         .bento-section {
@@ -741,7 +743,7 @@ return (
   ))}
 </div>
 
-  </>
+  </section>
 );
 
 };
